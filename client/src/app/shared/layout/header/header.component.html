@@ -1,0 +1,31 @@
+<nav  class="black" role="navigation">
+
+  <div class="container">
+
+    <div class="nav-wrapper "><a id="logo-container" routerLink="/" routerLinkActive="active"
+                                 class="brand-logo">Faculties</a>
+
+      <ul class="hide-on-med-and-down right">
+        <li appIsAdmin class="tab"><a routerLink="/users">USERS</a></li>
+        <li><a appIsNotLoginedInDirective routerLink="/sign-in" routerLinkActive="active" href="#">Sign in</a></li>
+        <li><a appIsNotLoginedInDirective routerLink="/sign-up" routerLinkActive="active" href="#">Sign up</a>
+        </li>
+
+        <li><a routerLink="/universities">Universities</a></li>
+        <li><a routerLink="/faculties">Faculties</a></li>
+        <li><a routerLink="/groups">Specialities</a></li>
+        <li><a appIsLoginedIn routerLink="/me">Me</a></li>
+        <li><a appIsLoginedIn (click)="logout()" href="/">Logout</a></li>
+      </ul>
+    </div>
+    <ul id="dropdown1" class="dropdown-content">
+      <li><a href="#!">one</a></li>
+      <li><a href="#!">two</a></li>
+      <li class="divider"></li>
+      <li><a href="#!">three</a></li>
+    </ul>
+
+  </div>
+
+
+</nav>

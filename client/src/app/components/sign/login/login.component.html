@@ -1,0 +1,25 @@
+<div class="sign-container">
+  <div class="signup-screen">
+    <div class="space-bot text-center">
+      <h1>Sign in</h1>
+      <div class="divider"></div>
+    </div>
+    <form [formGroup]="form" class="form-register" method="post" name="register" novalidate>
+      <div class="input-field col s6">
+        <input id="nickname" placeholder="Nickname" type="text" formControlName="username">
+      </div>
+
+      <div class="input-field col s6">
+        <input id="password" placeholder="Password" type="password" formControlName="password">
+      </div>
+
+
+      <div (click)="onSubmit()" class="space-top text-center">
+        <button class="btn green">signin</button>
+      </div>
+
+      <app-errors [form]="form" [errorMessages]="messages"></app-errors>
+    </form>
+  </div>
+</div>
+

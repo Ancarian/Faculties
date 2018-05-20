@@ -1,0 +1,49 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        dialect: org.hibernate.dialect.H2Dialect
+        hibernate.hbm2ddl.import_files: import.sql
+
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:E:/db;AUTO_SERVER=TRUE
+    username: sa
+    password:
+
+server:
+     port: 9000
+
+logging.level.org.hibernate.SQL.: DEBUG
+logging.file: myapplication.log
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+jwt:
+  token:
+    secret: ChangeMeToSomethingElse
+
+cross.origin: http://localhost:4200
+
+cloudinary:
+#  cloudname: bravewall
+#  api.key: 472951833181896
+#  api.secret: PNFHnk-FdjEfHgxR4Eu5ce39p7U
+  environment.variable: cloudinary://472951833181896:PNFHnk-FdjEfHgxR4Eu5ce39p7U@bravewall/
+
+spring.mail:
+  from: University Admission System
+  debug: false
+  host: smtp.gmail.com
+  port: 587
+  username: facultiesgit@gmail.com
+  password: z200198l192ws
+  transport.protocol: smtp
+  properties.mail.smtp:
+    auth: true
+    starttls.enable: true

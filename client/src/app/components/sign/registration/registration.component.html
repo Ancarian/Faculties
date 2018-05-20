@@ -1,0 +1,48 @@
+<div class="sign-container">
+  <div class="signup-screen">
+    <div class="space-bot text-center">
+      <div class="row text-center">
+        <div class="col s6 m6 " (click)="changeChoice(true)"><h6 [ngClass]="{'text-green':!isShowPicker}">FORM</h6>
+        </div>
+        <div class="col s6 m6 " (click)="changeChoice(false)"><h6 [ngClass]="{'text-green':isShowPicker}">PICKER</h6>
+        </div>
+      </div>
+      <div class="divider"></div>
+
+    </div>
+    <form [formGroup]="form" class="form-register" method="post" name="register" novalidate>
+
+      <div class="row">
+        <div class="col s12 m12">
+          <div *ngIf="!isShowPicker">
+            <div class="input-field">
+              <input id="first-name" type="text" placeholder="Firstname" formControlName="name">
+              <input id="last-name" type="text" placeholder="Lastname" formControlName="lastname">
+              <input id="patronymic" type="text" placeholder="Patronymic" formControlName="patronymic">
+              <input id="nickname" type="text" placeholder="Nickname" formControlName="nickname">
+              <input id="email" type="email" placeholder="Email" formControlName="email">
+              <input id="password" type="password" placeholder="Password" formControlName="password">
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div *ngIf="isShowPicker">
+        <app-subject-picker [userSubjects]="userSubjects"></app-subject-picker>
+      </div>
+
+      <app-errors [form]="form" [errorMessages]="messages"></app-errors>
+
+      <div (click)="onSubmit()" class="space-top text-center">
+        <button [disabled]="form.invalid" class="btn">signup</button>
+      </div>
+
+
+
+    </form>
+  </div>
+</div>
+
+
+

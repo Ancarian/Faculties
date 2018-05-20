@@ -1,0 +1,8 @@
+<div *ngIf="faculty" class="card col  s12 m12 l12">
+  <ul>
+    <li><a [routerLink]="['/faculties/' + faculty.id]"> {{faculty.name}}</a></li>
+    <li><a [routerLink]="['/faculties/' + faculty.id]"> {{faculty.information}}</a></li>
+    <li><a [routerLink]="['/universities/' + faculty.universityDto.id]"> faculty of {{faculty.universityDto.name}}</a>
+    </li>
+  </ul>
+</div>

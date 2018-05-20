@@ -1,0 +1,26 @@
+<style type="text/css">
+  .form-register {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+</style>
+<form *ngIf="form" [formGroup]="form" class="form-register" method="post" name="register" novalidate>
+
+
+  <input id="first-name" type="text" placeholder="Firstname" formControlName="name">
+  <input id="last-name" type="text" placeholder="Lastname" formControlName="lastname">
+  <input id="patronymic" type="text" placeholder="Patronymic" formControlName="patronymic">
+
+
+  <div class="user-container text-center break">
+    <app-subject-picker [userSubjects]="user.marks"></app-subject-picker>
+  </div>
+
+  <app-errors [form]="form" [errorMessages]="messages"></app-errors>
+
+  <div (click)="onSubmit()" class="space-top text-center">
+    <button [disabled]="form.invalid" class="btn">submit</button>
+  </div>
+
+</form>

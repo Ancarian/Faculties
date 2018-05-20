@@ -1,0 +1,10 @@
+.container{
+  margin: 0 auto;
+}
+.brand-logo{
+  size: 20px;
+}
+
+.hide{
+  display: none;
+}

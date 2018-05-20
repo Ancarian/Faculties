@@ -1,0 +1,7 @@
+.no-margin{
+  margin: 0!important;
+}
+
+p{
+  word-wrap: break-word;
+}

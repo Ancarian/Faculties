@@ -1,0 +1,11 @@
+<div class="card col s12 m12 l12">
+
+      <a [routerLink]="['/groups/' + group.id]"> {{group.information}}</a>
+
+      <ul>
+        <li>limit: {{group.limit}}</li>
+        <li>qualify: {{group.qualify}}</li>
+        <li><app-subject-list [subjs]="group.subjects"></app-subject-list></li>
+      </ul>
+
+</div>

@@ -1,0 +1,43 @@
+<div *ngIf="user" class="container user-container " xmlns="http://www.w3.org/1999/html">
+
+
+  <div class="row">
+
+    <div class="text-center break">
+      <div class="col s6 m6 " (click)="changeChoice(true)"><h6 [ngClass]="{'text-green':!isShowPicker}">PROFILE</h6>
+      </div>
+      <div class="col s6 m6 " (click)="changeChoice(false)"><h6 [ngClass]="{'text-green':isShowPicker}">SETTINGS</h6>
+      </div>
+    </div>
+
+      <div class="col s12 m12 l4 x4">
+        <div class="row">
+          <div class="image-container newsbrief">
+            <img *ngIf="user.photoUrl"  class="image" src={{user.photoUrl}}>
+            <p class="waves-effect waves-light blue btn file ">
+              <input type="file" name="file" id="file" (change)="handleFileInput($event.target.files)"
+                     accept=".jpg, .jpeg, .png"/>
+              <label for="file">new image</label>
+            </p>
+          </div>
+          <button *ngIf="user.groupId" [routerLink]="['/groups/' + user.groupId]" class="waves-effect waves-light blue btn break">speciality</button>
+        </div>
+      </div>
+
+
+      <div class="col s12 m12 l8 x8">
+        <h6 *ngIf="!isShowPicker">{{ user.name + " " + user.lastname + " " + user.patronymic}}</h6>
+
+        <div *ngIf="isShowPicker" class="user-container text-center break">
+          <app-change-email></app-change-email>
+          <app-change-password></app-change-password>
+          <app-settings [user]="user"></app-settings>
+        </div>
+      </div>
+
+  </div>
+
+</div>
+
+
+

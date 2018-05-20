@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+        dialect: org.hibernate.dialect.H2Dialect
+        hibernate.hbm2ddl.import_files: import.sqlss
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:file:D:/db;AUTO_SERVER=TRUE
+    username: sa
+    password:
+
+logging.level.org.hibernate.SQL.: DEBUG
+logging.level.org.hibernate.SQL: DEBUG
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+
+logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+
+mail.host: smtp.gmail.com
+mail.port: 465
+mail.username: facultiesgit@gmail.com
+mail.password: z200198l192ws
+mail.properties.mail.smtp.auth: true
+mail.properties.mail.smtp.starttls.enable: true
+mail.transport.protocol: smtp
+mail.smtp.auth: true
+mail.smtp.starttls.enable: true
+mail.debug: false
+mail.debug: true

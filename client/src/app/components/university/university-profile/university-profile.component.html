@@ -1,0 +1,10 @@
+<div *ngIf="university">
+
+  <div class="user-container">
+    <p>{{university.name}}</p>
+  </div>
+
+  <div class="row margins">
+    <app-faculty *ngFor="let faculty of university.faculties" [faculty]=faculty></app-faculty>
+  </div>
+</div>
