@@ -14,7 +14,7 @@ University admission system
 * Hibernate ORM
 * Swagger API
  
-### How to tun
+### How to run
 
 * Clone this repository 
 * Run ```run.bat``` script in scripts folder
