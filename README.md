@@ -1,7 +1,8 @@
 # Faculties
 
 University admission system
-
+<br/>
+<a href="https://codeclimate.com/github/Ancarian/Faculties/maintainability"><img src="https://api.codeclimate.com/v1/badges/48ce9aed8e3b6ae4716f/maintainability" /></a>
 ## Server
 
 ### Stack of technologies on the server side
