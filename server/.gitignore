@@ -1,89 +1,25 @@
-# Created by http://gitignore.io
+/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-### Windows ###
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
-
-# Folder config file
-Desktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-### Linux ###
-.*
-!.gitignore
-!.git*
-*~
-
-
-### OSX ###
-.DS_Store
-.AppleDouble
-.LSOverride
-Icon
-
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-### Java ###
-*.class
-
-# Package Files #
-*.jar
-*.war
-*.ear
-
-### Gradle ###
-# Exclude Folder List #
-.gradle/
-build/
-
-
-### Eclipse ###
-*.pydevproject
-.project
-.metadata
-bin/**
-tmp/**
-tmp/**/*
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
+### STS ###
+.apt_generated
 .classpath
-.settings/
-.loadpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# External tool builders
-.externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
-
-# CDT-specific
-.cproject
-
-# PDT-specific
-.buildpath
-
-### IntelliJ ###
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
 *.ipr
-*.iws
-.idea/
 
-### SVN ###
-.svn/
-
-### Maven ###
-target/
-
-/bin
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/

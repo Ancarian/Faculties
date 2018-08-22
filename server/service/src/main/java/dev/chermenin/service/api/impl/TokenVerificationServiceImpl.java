@@ -1,0 +1,46 @@
+package dev.chermenin.service.api.impl;
+
+import dev.chermenin.dao.TokenVerificationRepository;
+import dev.chermenin.dao.UserRepository;
+import dev.chermenin.model.impl.EmailVerificationToken;
+import dev.chermenin.model.impl.User;
+import dev.chermenin.service.api.TokenVerificationService;
+import dev.chermenin.service.exception.BadRequestException;
+import dev.chermenin.service.exception.NotFoundException;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.UUID;
+
+@Service
+@AllArgsConstructor
+public class TokenVerificationServiceImpl implements TokenVerificationService {
+    private final TokenVerificationRepository tokenVerificationRepository;
+    private final UserRepository userRepository;
+    @Override
+    public EmailVerificationToken createVerificationToken(User user) {
+        EmailVerificationToken token = new EmailVerificationToken();
+        token.setUser(user);
+        token.setToken(UUID.randomUUID().toString());
+        return tokenVerificationRepository.save(token);
+    }
+
+    @Override
+    public EmailVerificationToken findByToken(String token) {
+        return tokenVerificationRepository.findByToken(token).
+                orElseThrow(() -> new NotFoundException("error.emailToken.NotExists"));
+    }
+
+    @Override
+    public User findUserByToken(String verificationToken) {
+        return userRepository.findUserByToken(verificationToken)
+                .orElseThrow(()-> new NotFoundException("error.user.NotExistsId"));
+    }
+
+    @Override
+    public boolean isExpired(EmailVerificationToken token) {
+        Calendar cal = Calendar.getInstance();
+        return (token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0;
+    }
+}

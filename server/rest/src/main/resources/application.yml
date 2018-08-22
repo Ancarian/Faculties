@@ -5,35 +5,32 @@ spring:
 
     properties:
       hibernate:
-        show_sql: false
-        format_sql: false
+        show_sql: true
+        format_sql: true
         dialect: org.hibernate.dialect.H2Dialect
         hibernate.hbm2ddl.import_files: import.sql
 
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:file:E:/db;AUTO_SERVER=TRUE
+    url: jdbc:h2:E:\test;MODE=MYSQL
     username: sa
     password:
+security.oauth2.resource.filter-order: 3
 
-server:
-     port: 9000
+security.signing-key: MaYzkSjmkzPC57L
+security.encoding-strength: 53
+security.security-realm: Spring Boot JWT Example Realm
 
-logging.level.org.hibernate.SQL.: DEBUG
-logging.file: myapplication.log
-logging.level.org.hibernate.SQL: DEBUG
-logging.level.org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
-jwt:
-  token:
-    secret: ChangeMeToSomethingElse
+security.jwt.client-id: testjwtclientid
+security.jwt.client-secret: XY7kmzoNzl100
+security.jwt.grant-type: password
+security.jwt.scope-read: read
+security.jwt.scope-write: write
+security.jwt.resource-ids: testjwtresourceid
 
 cross.origin: http://localhost:4200
 
 cloudinary:
-#  cloudname: bravewall
-#  api.key: 472951833181896
-#  api.secret: PNFHnk-FdjEfHgxR4Eu5ce39p7U
   environment.variable: cloudinary://472951833181896:PNFHnk-FdjEfHgxR4Eu5ce39p7U@bravewall/
 
 spring.mail:
@@ -47,3 +44,5 @@ spring.mail:
   properties.mail.smtp:
     auth: true
     starttls.enable: true
+server:
+  address: 192.168.100.7
