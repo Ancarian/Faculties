@@ -17,4 +17,5 @@ public interface EmailService {
     void send();
 
     void confirmRegistration(EmailVerificationToken token, Locale locale) throws Exception;
+
 }

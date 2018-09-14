@@ -21,6 +21,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -67,10 +68,21 @@ public class AuthenticationController {
     public ResponseEntity<UserProfileDto> regitrationConfirm(@RequestParam("token") String token) {
         EmailVerificationToken verificationToken = tokenVerificationService.findByToken(token);
         User user = verificationToken.getUser();
-        if (tokenVerificationService.isExpired(verificationToken)) {
+
+        if (tokenVerificationService.isExpired(verificationToken) || user.isEnabled()) {
             throw new BadRequestException("token has been expired");
         }
         userUpdateService.enableUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/resendRegistrationToken", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<UserProfileDto> resendRegistrationToken(
+            HttpServletRequest request, @RequestParam("token") String existingToken) throws Exception{
+        EmailVerificationToken newToken = tokenVerificationService.generateNewVerificationToken(existingToken);
+        emailService.confirmRegistration(newToken, request.getLocale());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

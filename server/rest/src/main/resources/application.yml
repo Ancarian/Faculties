@@ -15,6 +15,7 @@ spring:
     url: jdbc:h2:E:\test;MODE=MYSQL
     username: sa
     password:
+
 security.oauth2.resource.filter-order: 3
 
 security.signing-key: MaYzkSjmkzPC57L
@@ -44,5 +45,5 @@ spring.mail:
   properties.mail.smtp:
     auth: true
     starttls.enable: true
-server:
-  address: 192.168.100.7
+#server:
+#  address: 192.168.100.7

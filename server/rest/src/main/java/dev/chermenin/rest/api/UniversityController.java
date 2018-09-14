@@ -6,11 +6,8 @@ import dev.chermenin.service.api.UniversityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "${cross.origin}")
@@ -42,8 +38,8 @@ public class UniversityController {
         return new ResponseEntity<>(universityDto, HttpStatus.OK);
     }
 
+    @ApiOperation(value = "save new university", response = UniversityRegistrationDto.class)
     @PreAuthorize("hasAnyAuthority('ADMIN')")
-    @ApiOperation(value = "save new university")
     @RequestMapping(value = "/university", method = RequestMethod.POST)
     public ResponseEntity<UniversityDto> addUniversity(@Valid @NotNull @RequestBody UniversityRegistrationDto universityDto) {
         return new ResponseEntity<>(universityService.save(universityDto), HttpStatus.CREATED);
