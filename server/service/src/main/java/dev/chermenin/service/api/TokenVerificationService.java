@@ -12,6 +12,5 @@ public interface TokenVerificationService {
 
     User findUserByToken(String verificationToken);
 
-    boolean isExpired(EmailVerificationToken token);
-
+    void enableUser(String token);
 }

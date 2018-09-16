@@ -2,11 +2,11 @@ package dev.chermenin.service.api.impl;
 
 import dev.chermenin.dao.dto.user.UserDto;
 import dev.chermenin.model.impl.EmailVerificationToken;
+import dev.chermenin.model.impl.PasswordResetToken;
 import dev.chermenin.service.api.EmailService;
 import dev.chermenin.service.api.model.Mail;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,7 +20,10 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 
 @Service
@@ -57,7 +60,7 @@ public class EmailServiceImpl implements EmailService {
 
     @Async
     @Override
-    public void confirmRegistration(EmailVerificationToken token, Locale locale) throws Exception{
+    public void confirmRegistration(EmailVerificationToken token, Locale locale) throws Exception {
         String recipientAddress = token.getUser().getEmail();
         String subject = messages.getMessage("email.EmailConfirm", null, locale);
         String buttonSubmit = messages.getMessage("email.ButtonSubmit", null, locale);
@@ -72,9 +75,32 @@ public class EmailServiceImpl implements EmailService {
         mail.setTemplate("EmailConfirm");
         Map<String, Object> model = new HashMap<>();
         model.put("message", confirmationUrl);
-        model.put("buttonSubmit",buttonSubmit);
-        model.put("orLink",orLink);
-        model.put("messageType",subject);
+        model.put("buttonSubmit", buttonSubmit);
+        model.put("orLink", orLink);
+        model.put("messageType", subject);
+        mail.setModel(model);
+
+        sendSimpleMessage(mail);
+    }
+
+    @Async
+    @Override
+    public void resetPassword(PasswordResetToken token, Locale locale) throws Exception {
+        String recipientAddress = token.getUser().getEmail();
+        String subject = messages.getMessage("email.ResetPassword", null, locale);
+        String buttonSubmit = messages.getMessage("email.ButtonSubmit", null, locale);
+
+        String confirmationUrl = "http://localhost:8080/auth/changePassword?token=" + token.getToken() + "&id=" + token.getUser().getId();
+
+        Mail mail = new Mail();
+        mail.setTo(recipientAddress);
+        mail.setSubject(subject);
+        mail.setFrom("facultiesgit@gmail.com");
+        mail.setTemplate("EmailConfirm");
+        Map<String, Object> model = new HashMap<>();
+        model.put("message", confirmationUrl);
+        model.put("buttonSubmit", buttonSubmit);
+        model.put("messageType", subject);
         mail.setModel(model);
 
         sendSimpleMessage(mail);

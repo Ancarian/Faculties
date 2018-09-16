@@ -50,6 +50,8 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
     @EntityGraph(value = "user.allJoinsForId")
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByEmailAndEnabledTrue(String email);
+
     @EntityGraph(value = "user.allJoinsForId")
     Optional<User> findUserByNickname(String nickname);
 

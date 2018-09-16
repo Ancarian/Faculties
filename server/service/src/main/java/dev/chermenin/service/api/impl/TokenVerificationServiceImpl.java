@@ -5,6 +5,8 @@ import dev.chermenin.dao.UserRepository;
 import dev.chermenin.model.impl.EmailVerificationToken;
 import dev.chermenin.model.impl.User;
 import dev.chermenin.service.api.TokenVerificationService;
+import dev.chermenin.service.api.UserUpdateService;
+import dev.chermenin.service.exception.BadRequestException;
 import dev.chermenin.service.exception.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,11 @@ import java.util.UUID;
 
 @Service
 @AllArgsConstructor
-public class TokenVerificationServiceImpl implements TokenVerificationService {
+public class TokenVerificationServiceImpl extends AbstractTokenService implements TokenVerificationService {
     private static final int EXPIRATION = 60 * 24;
     private final TokenVerificationRepository tokenVerificationRepository;
     private final UserRepository userRepository;
+    private final UserUpdateService userUpdateService;
 
     @Override
     public EmailVerificationToken createVerificationToken(User user) {
@@ -43,9 +46,14 @@ public class TokenVerificationServiceImpl implements TokenVerificationService {
     }
 
     @Override
-    public boolean isExpired(EmailVerificationToken token) {
-        Calendar cal = Calendar.getInstance();
-        return (token.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0;
+    public void enableUser(String token) {
+        EmailVerificationToken verificationToken = findByToken(token);
+        User user = verificationToken.getUser();
+
+        if (isExpired(verificationToken.getExpiryDate()) || user.isEnabled()) {
+            throw new BadRequestException("token has been expired");
+        }
+        userUpdateService.enableUser(user);
     }
 
     @Override
@@ -57,11 +65,8 @@ public class TokenVerificationServiceImpl implements TokenVerificationService {
         return tokenVerificationRepository.save(newToken);
     }
 
-    private Date calculateExpiryDate() {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Timestamp(cal.getTime().getTime()));
-        cal.add(Calendar.MINUTE, EXPIRATION);
-        return new Date(cal.getTime().getTime());
+    @Override
+    protected int getExpiration() {
+        return EXPIRATION;
     }
-
 }

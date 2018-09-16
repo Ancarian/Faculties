@@ -24,20 +24,20 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<Object> handleUserNotFound(RuntimeException ex, WebRequest request) {
-        GenericResponse bodyOfResponse = new GenericResponse(messageSource.getMessage(ex.getMessage(), null, request.getLocale()), "UserNotFound");
+        GenericResponse bodyOfResponse = new GenericResponse(messageSource.getMessage(ex.getMessage(), null, request.getLocale()));
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
 
     @ExceptionHandler({ConflictException.class})
     public ResponseEntity<Object> handleConflict(RuntimeException ex, WebRequest request) {
-        GenericResponse bodyOfResponse = new GenericResponse(messageSource.getMessage(ex.getMessage(), null, request.getLocale()), "409");
+        GenericResponse bodyOfResponse = new GenericResponse(messageSource.getMessage(ex.getMessage(), null, request.getLocale()));
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
     @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleInternal(RuntimeException ex, WebRequest request) {
-        GenericResponse bodyOfResponse = new GenericResponse(ex.getMessage(), "InternalError");
+        GenericResponse bodyOfResponse = new GenericResponse(ex.getMessage());
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
@@ -45,17 +45,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @Setter
     public static class GenericResponse {
         private String message;
-        private String error;
 
         public GenericResponse(String message) {
             super();
             this.message = message;
-        }
-
-        public GenericResponse(String message, String error) {
-            super();
-            this.message = message;
-            this.error = error;
         }
     }
 }
