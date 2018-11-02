@@ -12,4 +12,6 @@ import java.util.List;
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
     Page<City> findAllByCountryIdAndNameLike(Long id, String name, Pageable pageable);
+
+	Page<City> findAllByCountryId(Long id, Pageable pageable);
 }

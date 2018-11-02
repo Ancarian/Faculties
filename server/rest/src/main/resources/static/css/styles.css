@@ -1,0 +1,58 @@
+* {
+    font-family: 'Raleway', sans-serif;
+}
+
+.logo {
+    color: #002F36;
+    font-size: 50px;
+}
+
+.wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    vertical-align: middle;
+    margin: 5px 11%;
+    background: #fff;
+}
+
+button {
+    width: 100px;
+    height: 50px;
+    color: white;
+    background-color: #17B67D;
+    border: 0;
+}
+
+/*RESET  -- this may be ignored by some email clients*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    border: 0 none;
+    height: auto;
+    line-height: 100%;
+    outline: none;
+    text-decoration: none;
+}
+
+a img {
+    border: 0 none;
+}
+
+.imageFix {
+    display: block;
+}
+
+table, td {
+    border-collapse: collapse;
+}
+
+#bodyTable {
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+}

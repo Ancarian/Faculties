@@ -41,7 +41,6 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class AuthenticationController {
     private final AuthService authenticationService;
-    private final UserUpdateService userUpdateService;
     private final UserService userService;
     private final EmailService emailService;
     private final TokenVerificationService tokenVerificationService;
@@ -63,6 +62,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PreAuthorize("!isAuthenticated()")
     @ApiOperation(value = "registration confirm")
     @GetMapping(value = "/registration_confirm")
     public ResponseEntity<UserProfileDto> regitrationConfirm(@RequestParam("token") String token) {
@@ -70,7 +70,7 @@ public class AuthenticationController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
+    @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/resend_registration", method = RequestMethod.GET)
     public ResponseEntity<UserProfileDto> resendRegistrationToken(HttpServletRequest request
             , @RequestParam("token") String existingToken) throws Exception {
@@ -87,6 +87,7 @@ public class AuthenticationController {
     }
 
 
+    @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
     public RestExceptionHandler.GenericResponse resetPassword(HttpServletRequest request
             , @RequestParam("email") String userEmail) throws Exception {
@@ -95,6 +96,7 @@ public class AuthenticationController {
         return new RestExceptionHandler.GenericResponse("password has been reseted");
     }
 
+    @PreAuthorize("!isAuthenticated()")
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ResponseEntity changePassword(@RequestBody @NotNull final ResetPasswordDto resetPasswordDto
             , @RequestParam("id") long id, @RequestParam("token") String token) {
