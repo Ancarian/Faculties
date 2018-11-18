@@ -1,7 +1,6 @@
 language: java
 script:
-  - cd server/
-  - mvn clean install
+  - bash ./build.sh
 branches:
   only:
     - master
