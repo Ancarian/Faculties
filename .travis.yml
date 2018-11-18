@@ -1,6 +1,6 @@
 language: java
 script:
-  - ./travis.sh
+  - chmod +x ./build.sh
 branches:
   only:
     - master
