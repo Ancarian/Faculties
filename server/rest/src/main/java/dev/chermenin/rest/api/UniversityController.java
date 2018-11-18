@@ -44,4 +44,12 @@ public class UniversityController {
     public ResponseEntity<UniversityDto> addUniversity(@Valid @NotNull @RequestBody UniversityRegistrationDto universityDto) {
         return new ResponseEntity<>(universityService.save(universityDto), HttpStatus.CREATED);
     }
+
+    @ApiOperation(value = "update university", response = UniversityRegistrationDto.class)
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @RequestMapping(value = "/university", method = RequestMethod.PUT)
+    public ResponseEntity updateUniversity(@Valid @NotNull @RequestBody UniversityRegistrationDto universityDto) {
+        universityService.update(universityDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
 }
