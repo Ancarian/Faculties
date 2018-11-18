@@ -40,6 +40,6 @@ public class Application {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
         messageSource.setBasename("classpath:messages");
         messageSource.setDefaultEncoding("UTF-8");
-        return messageSource
+        return messageSource;
     }
 }
