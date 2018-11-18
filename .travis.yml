@@ -1,6 +1,7 @@
 language: java
 script:
-  - chmod +x ./build.sh
+  - cd server/
+  - mvn clean install
 branches:
   only:
     - master
