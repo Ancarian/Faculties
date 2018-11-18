@@ -1,6 +1,6 @@
 language: java
 script:
-  - mvn clean package
+  - ./travis.sh
 branches:
   only:
     - master
